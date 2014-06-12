@@ -28,7 +28,7 @@ function maxSizeSetUp(done) {
         add(this.rs, "/sinon.js", "Hey", { etag: "1234" }),
         add(this.rs, "/when.js", "Hm", { etag: "0123" }),
         add(this.rs2, "/jquery.js", "Eh", { etag: "zxcv" })
-    ], function () { done(); });
+    ]).then(function () { done(); });
 }
 
 buster.testCase("Resource set cache", {
@@ -41,7 +41,7 @@ buster.testCase("Resource set cache", {
         when.all([
             add(rs, "/buster.js", "Yo!", { etag: "abcd1234" }),
             add(rs, "/sinon.js", "Hey!", {})
-        ], function () {
+        ]).then(function (a) {
             this.cache.inflate(rs).then(function () { done(); });
         }.bind(this));
     },
